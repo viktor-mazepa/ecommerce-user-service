@@ -1,3 +1,5 @@
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/viktor-mazepa/ecommerce-user-service/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/viktor-mazepa/ecommerce-user-service/tree/master)
+
 # ecommerce-user-service
 
 User management service for the ecommerce platform. It exposes admin endpoints to create, update, enable/disable, and delete users, and integrates with Keycloak for identity management.
