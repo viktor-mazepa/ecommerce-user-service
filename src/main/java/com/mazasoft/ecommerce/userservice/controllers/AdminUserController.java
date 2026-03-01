@@ -3,8 +3,11 @@ package com.mazasoft.ecommerce.userservice.controllers;
 import com.mazasoft.ecommerce.userservice.dto.CreateUserAdmin;
 import com.mazasoft.ecommerce.userservice.dto.UpdateUserAdmin;
 import com.mazasoft.ecommerce.userservice.dto.UserAdminResponse;
+import com.mazasoft.ecommerce.userservice.providers.KeycloakAdminTokenProvider;
 import com.mazasoft.ecommerce.userservice.services.AdminUserService;
 import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +16,8 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/admin/users")
 public class AdminUserController {
+
+    private static final Logger log = LoggerFactory.getLogger(AdminUserController.class);
 
     private final AdminUserService adminUserService;
 
@@ -23,7 +28,6 @@ public class AdminUserController {
     @PostMapping
     public ResponseEntity<UserAdminResponse> create(@Valid @RequestBody CreateUserAdmin createUserAdmin) {
         return ResponseEntity.ok(adminUserService.create(createUserAdmin));
-
     }
 
     @PutMapping("/{id}")

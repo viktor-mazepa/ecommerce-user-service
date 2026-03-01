@@ -39,7 +39,8 @@ public class UserMapper {
                 user.getBirthDate(),
                 user.getPhoneNumber(),
                 user.getRole(),
-                user.getKcId()
+                user.getKcId(),
+                user.getStatus()
         );
     }
 

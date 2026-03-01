@@ -1,5 +1,7 @@
 package com.mazasoft.ecommerce.userservice.dto;
 
+import com.mazasoft.ecommerce.userservice.enums.Status;
+
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -13,5 +15,5 @@ public record UserAdminResponse(
                                 LocalDate birthDate,
                                 String phoneNumber,
                                 String role,
-                                UUID kcId) {
+                                UUID kcId, Status status) {
 }

@@ -1,14 +1,13 @@
-package com.mazasoft.ecommerce.userservice.services;
+package com.mazasoft.ecommerce.userservice.services.database;
 
 import com.mazasoft.ecommerce.userservice.entities.User;
+import com.mazasoft.ecommerce.userservice.enums.Status;
 import com.mazasoft.ecommerce.userservice.repositories.UserRepository;
 import io.micrometer.common.util.StringUtils;
 import jakarta.persistence.EntityNotFoundException;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 
-import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +22,7 @@ public class UserService {
 
     @Transactional
     public User create(User user) {
+        user.setStatus(Status.PENDING);
         return userRepository.save(user);
     }
 
@@ -71,5 +71,19 @@ public class UserService {
     @Transactional(readOnly = true)
     public User getByEmail(String email) {
         return userRepository.findByEmail(email).orElseThrow(()-> new EntityNotFoundException("User not found by email: " + email));
+    }
+
+    @Transactional
+    public User enable(UUID id) {
+        User user = getById(id);
+        user.setStatus(Status.ACTIVE);
+        return userRepository.save(user);
+    }
+
+    @Transactional
+    public User disable(UUID id) {
+        User user = getById(id);
+        user.setStatus(Status.DISABLED);
+        return userRepository.save(user);
     }
 }

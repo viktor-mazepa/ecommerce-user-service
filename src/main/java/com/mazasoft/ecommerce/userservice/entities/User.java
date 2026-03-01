@@ -1,9 +1,7 @@
 package com.mazasoft.ecommerce.userservice.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.mazasoft.ecommerce.userservice.enums.Status;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -54,6 +52,10 @@ public class User {
 
     @Column(name = "kcid")
     private UUID kcId;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "provisioning_status", nullable = false, length = 100)
+    private Status status;
 
     public User() {
     }
@@ -144,5 +146,13 @@ public class User {
 
     public void setKcId(UUID kcId) {
         this.kcId = kcId;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }

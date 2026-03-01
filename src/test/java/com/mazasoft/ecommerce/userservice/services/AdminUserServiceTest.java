@@ -7,15 +7,19 @@ import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.mazasoft.ecommerce.userservice.dto.CreateUserAdmin;
 import com.mazasoft.ecommerce.userservice.dto.UpdateUserAdmin;
 import com.mazasoft.ecommerce.userservice.dto.UserAdminResponse;
 import com.mazasoft.ecommerce.userservice.entities.User;
+import com.mazasoft.ecommerce.userservice.enums.Status;
 import com.mazasoft.ecommerce.userservice.mappers.UserMapper;
 import com.mazasoft.ecommerce.userservice.ports.IdentityAdminPort;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
+
+import com.mazasoft.ecommerce.userservice.services.database.UserService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -38,7 +42,7 @@ class AdminUserServiceTest {
     private AdminUserService adminUserService;
 
     @Test
-    void create_assignsRoleAndUpdatesUser() {
+    void create_assignsRoleAndUpdatesUser() throws JsonProcessingException {
         CreateUserAdmin request = new CreateUserAdmin(
                 "jdoe",
                 "jdoe@example.com",
@@ -71,7 +75,8 @@ class AdminUserServiceTest {
                 request.birthDate(),
                 request.phoneNumber(),
                 request.role(),
-                kcId
+                kcId,
+                user.getStatus()
         ));
 
         UserAdminResponse response = adminUserService.create(request);
@@ -117,7 +122,7 @@ class AdminUserServiceTest {
                 request.birthDate(),
                 request.phoneNumber(),
                 request.role(),
-                kcId
+                kcId, Status.ACTIVE
         ));
 
         adminUserService.update(userId, request);

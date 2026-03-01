@@ -1,6 +1,4 @@
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
-
-CREATE SCHEMA IF NOT EXISTS users;
 SET search_path TO users;
 
 CREATE INDEX IF NOT EXISTS idx_users_user_name ON users (user_name);

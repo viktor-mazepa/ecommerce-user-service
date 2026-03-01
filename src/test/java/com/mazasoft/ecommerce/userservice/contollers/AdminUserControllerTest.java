@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mazasoft.ecommerce.userservice.controllers.AdminUserController;
 import com.mazasoft.ecommerce.userservice.dto.CreateUserAdmin;
 import com.mazasoft.ecommerce.userservice.dto.UserAdminResponse;
+import com.mazasoft.ecommerce.userservice.enums.Status;
 import com.mazasoft.ecommerce.userservice.services.AdminUserService;
 import java.time.LocalDate;
 import java.util.UUID;
@@ -55,7 +56,8 @@ class AdminUserControllerTest {
                 request.birthDate(),
                 request.phoneNumber(),
                 request.role(),
-                UUID.randomUUID()
+                UUID.randomUUID(),
+                Status.PENDING
         ));
 
         mockMvc.perform(post("/admin/users")

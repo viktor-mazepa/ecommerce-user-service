@@ -8,6 +8,7 @@ import static org.mockito.Mockito.when;
 
 import com.mazasoft.ecommerce.userservice.entities.User;
 import com.mazasoft.ecommerce.userservice.repositories.UserRepository;
+import com.mazasoft.ecommerce.userservice.services.database.UserService;
 import jakarta.persistence.EntityNotFoundException;
 import java.time.LocalDate;
 import java.util.Optional;
